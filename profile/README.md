@@ -22,8 +22,11 @@ Projects v2, milestones, branch protection — all require hunting for opaque Gr
 
 No more `PVT_kwDOBx...` or `PVTSSF_...` hunting.
 
-Claude todo lists can be reliably persiated as github issues and projects. Multiple agents can work from the same source of truth, and communicate with each other via comments on issues and PRs.
-Enable agents to adopt a role or persona without complex agent orchestration. Just run several open sessions and they can share state via github.
+Claude TODO lists can be reliably persisted as github issues and projects. 
+
+Multiple agents can work from the same source of truth, and communicate with each other via comments on issues and PRs. 
+Agents can implicitly adopt a role or persona without complex agent orchestration. Just run several open sessions and they can share state via github.
+
 
 ### [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus)
 
