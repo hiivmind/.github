@@ -1,12 +1,16 @@
 # hiivmind
 
-**Meta-skills for Claude Code.** We build orchestration layers that turn complex toolchains into composable, cacheable workflows.
+**Meta-skills for Claude Code.** 
 
 ---
 
 ## What We Build
 
+
 Claude Code skills that solve for persistence of knowledge in Claude Code — establishing and maintaining your long-term context without filling your short-term context window!
+
+Our tools aim to be composable, cacheable, context-efficient support tools for Claude Code agentic workflows.
+
 
 ### [hiivmind-pulse-gh](https://github.com/hiivmind/hiivmind-pulse-gh)
 
@@ -22,10 +26,11 @@ Projects v2, milestones, branch protection — all require hunting for opaque Gr
 
 No more `PVT_kwDOBx...` or `PVTSSF_...` hunting.
 
-Claude TODO lists can be reliably persisted as github issues and projects. 
-
-Multiple agents can work from the same source of truth, and communicate with each other via comments on issues and PRs. 
-Agents can implicitly adopt a role or persona without complex agent orchestration. Just run several open sessions and they can share state via github.
+Builds skills that understand a structured cache of references for all github entities. 
+Includes a complete library of GraphQL, REST and CLI commands implmented as simple bash functions with auth managed locally by the official github CLI.  
+Enables Claude Code to reliably manage all github workflows, including project management. 
+Enables full decoupling of Claude Code sessions from short-term TODO lists and context. 
+Multiple agents can even work from the same project as the source of truth, and communicate with each other via comments on issues and PRs. 
 
 
 ### [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus)
