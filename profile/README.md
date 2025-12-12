@@ -33,7 +33,7 @@ hiivmind-corpus-init → hiivmind-corpus-build → hiivmind-corpus-refresh
        (once)                (once)                  (periodic)
 ```
 
-Works offline. Tracks commit SHAs. Falls back to raw GitHub URLs when needed.
+Utilises offlne cache for fast searching. Tracks commit SHAs. Falls back to raw GitHub URLs when needed.
 
 ---
 
