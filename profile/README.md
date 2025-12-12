@@ -6,7 +6,7 @@
 
 ## What We Build
 
-Claude Code skills that solve for persistence of knowledge in Claude Code — establishing and maintaining your context without filling your context window!
+Claude Code skills that solve for persistence of knowledge in Claude Code — establishing and maintaining your long-term context without filling your short-term context window!
 
 ### [hiivmind-pulse-gh](https://github.com/hiivmind/hiivmind-pulse-gh)
 
