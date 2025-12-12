@@ -1,22 +1,18 @@
 # hiivmind
 
-**Meta-skills for Claude Code.** 
+**Persistent context for Claude Code.**
+
+Skills that establish and maintain long-term knowledge without filling your context window.
 
 ---
 
-## What We Build
-
-
-Claude Code skills that solve for persistence of knowledge in Claude Code — establishing and maintaining your long-term context without filling your short-term context window!
-
-Our tools aim to be composable, cacheable, context-efficient support tools for Claude Code agentic workflows.
-
+## Core Plugins
 
 ### [hiivmind-pulse-gh](https://github.com/hiivmind/hiivmind-pulse-gh)
 
-GitHub automation that actually understands your org.
+**GitHub automation that understands your org.**
 
-Projects v2, milestones, branch protection — all require hunting for opaque GraphQL node IDs. `pulse-gh` discovers your org structure once, caches it, and lets you work in plain English from then on.
+Projects v2, milestones, branch protection — all require hunting for opaque GraphQL node IDs. `pulse-gh` discovers your org structure once, caches it, and works in plain English from then on.
 
 ```
 "Show me in-progress items assigned to @alice"
@@ -26,25 +22,48 @@ Projects v2, milestones, branch protection — all require hunting for opaque Gr
 
 No more `PVT_kwDOBx...` or `PVTSSF_...` hunting.
 
-Builds skills that understand a structured cache of references for all github entities. 
-Includes a complete library of GraphQL, REST and CLI commands implmented as simple bash functions with auth managed locally by the official github CLI.  
-Enables Claude Code to reliably manage all github workflows, including project management. 
-Enables full decoupling of Claude Code sessions from short-term TODO lists and context. 
-Multiple agents can even work from the same project as the source of truth, and communicate with each other via comments on issues and PRs. 
-
+**What it provides:**
+- Cached workspace structure — org, repos, projects, fields, options
+- 12 domain libraries — Issues, PRs, Projects v2, Milestones, Protection, Actions, Secrets, Releases...
+- Multi-agent coordination — shared project boards as source of truth, communication via issue comments
 
 ### [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus)
 
-Persistent documentation indexes for any open-source project.
+**Persistent documentation indexes for any project.**
 
-Instead of web search or stale training data, `corpus` creates human-curated markdown indexes that track upstream changes. Point it at a repo, build the index collaboratively, refresh when things change.
+Instead of web search or stale training data, `corpus` creates human-curated markdown indexes that track upstream changes.
 
 ```
 hiivmind-corpus-init → hiivmind-corpus-build → hiivmind-corpus-refresh
        (once)                (once)                  (periodic)
 ```
 
-Utilises local cache for fast searching. Tracks commit SHAs. Falls back to raw GitHub URLs when needed.
+Point it at a repo, build the index collaboratively, refresh when things change. Local cache for fast searching. Tracks commit SHAs. Falls back to raw GitHub URLs when needed.
+
+---
+
+## Corpus Marketplaces
+
+Pre-built documentation indexes, ready to install.
+
+### [hiivmind-corpus-data](https://github.com/hiivmind/hiivmind-corpus-data)
+
+**Data engineering libraries:**
+
+| Corpus | Library |
+|--------|---------|
+| `hiivmind-corpus-polars` | Fast DataFrames in Python and Rust |
+| `hiivmind-corpus-ibis` | Portable expressions across 20+ SQL backends |
+| `hiivmind-corpus-narwhals` | DataFrame-agnostic code for pandas, Polars, PyArrow |
+| `hiivmind-corpus-substrait` | Cross-language query plans and compute interop |
+
+### [hiivmind-corpus-claude](https://github.com/hiivmind/hiivmind-corpus-claude)
+
+**Claude ecosystem:**
+
+| Corpus | Library |
+|--------|---------|
+| `hiivmind-corpus-claude-agent-sdk` | Claude Agent SDK documentation |
 
 ---
 
@@ -60,18 +79,25 @@ Utilises local cache for fast searching. Tracks commit SHAs. Falls back to raw G
 
 ## Getting Started
 
-Both projects are Claude Code plugins. Install via the marketplace:
+Install via the Claude Code marketplace:
 
-```
+```bash
+# GitHub automation
 /plugin marketplace add hiivmind/hiivmind-pulse-gh
 /plugin install hiivmind-pulse-gh@hiivmind-pulse-gh
-```
 
-```
+# Documentation corpus tooling
 /plugin marketplace add hiivmind/hiivmind-corpus
 /plugin install hiivmind-corpus@hiivmind-corpus
+
+# Pre-built corpora (install what you need)
+/plugin marketplace add hiivmind/hiivmind-corpus-data
+/plugin install hiivmind-corpus-polars
+
+/plugin marketplace add hiivmind/hiivmind-corpus-claude
+/plugin install hiivmind-corpus-claude-agent-sdk
 ```
 
 ---
 
-<sub>Built by developers who got tired of the same boilerplate. Melbourne, AU.</sub>
+<sub>Melbourne, AU</sub>
