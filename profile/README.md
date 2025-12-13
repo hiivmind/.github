@@ -2,40 +2,21 @@
 
 **Persistent context for Claude Code.**
 
-Skills that establish and maintain long-term knowledge without filling your context window.
+Skills that establish and maintain long-term knowldege without filling your context window.
 
 ---
 
 ## Core Plugins
 
-### [hiivmind-pulse-gh](https://github.com/hiivmind/hiivmind-pulse-gh)
-
-**GitHub automation that understands your org.**
-
-Projects v2, milestones, branch protection — all require hunting for opaque GraphQL node IDs. `hiivmind-pulse-gh` discovers your org structure once, caches it, and works in plain English from then on.
-
-```
-"Show me in-progress items assigned to @alice"
-"Create a v2.0 milestone for the api repo"
-"Protect main with required reviews"
-```
-
-No more `PVT_kwDOBx...` or `PVTSSF_...` hunting.
-
-**What it provides:**
-- Cached workspace structure — org, repos, projects, fields, options
-- 12 domain libraries — Issues, PRs, Projects v2, Milestones, Protection, Actions, Secrets, Releases...
-- Multi-agent coordination — shared project boards as source of truth, communication via issue comments
-
 ### [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus)
 
 **Persistent documentation indexes for any project.**
 
-Think of it like [Claude Projects](https://claude.ai) for Claude Code—but better. With Projects, you dump docs, code, and PDFs into a collection that persists across chats. But everything consumes context, there's no way to prioritize what matters, no freshness tracking, no namespacing, no search.
+Think of it like Claude Projects for Claude Code, but better. With Projects, you dump docs, code, and PDFs into a collection that persists across chats. But everything consumes context, there's no way to prioritize what matters, no freshness tracking, no namespacing, no search.
 
-A corpus solves all of this. You build a curated index once, Claude searches it directly without filling your context window, and the index tracks exactly where everything came from and how fresh it is. Install as many as you need—they're lightweight and independent.
+A corpus solves all of this. You build a curated index once, Claude searches it directly without filling your context window, and the index tracks exactly where everything came from and how fresh it is. Install as many as you need. They're lightweight and independent.
 
-This implements the ["just in time" context pattern](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) recommended by Anthropic—lightweight identifiers that load content on demand, like how humans use indexes rather than memorizing corpuses.
+This implements the ["just in time" context pattern](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) recommended by Anthropic: lightweight identifiers that load content on demand, like how humans use indexes rather than memorizing corpuses.
 
 ```
 /hiivmind-corpus
