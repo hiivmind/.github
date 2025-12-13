@@ -12,7 +12,7 @@ Skills that establish and maintain long-term knowledge without filling your cont
 
 **GitHub automation that understands your org.**
 
-Projects v2, milestones, branch protection — all require hunting for opaque GraphQL node IDs. `pulse-gh` discovers your org structure once, caches it, and works in plain English from then on.
+Projects v2, milestones, branch protection — all require hunting for opaque GraphQL node IDs. `hiivmind-pulse-gh` discovers your org structure once, caches it, and works in plain English from then on.
 
 ```
 "Show me in-progress items assigned to @alice"
@@ -31,14 +31,22 @@ No more `PVT_kwDOBx...` or `PVTSSF_...` hunting.
 
 **Persistent documentation indexes for any project.**
 
-Instead of web search or stale training data, `corpus` creates human-curated markdown indexes that track upstream changes.
+Instead of web search or stale training data, `hiivmind-corpus` creates human-curated markdown indexes that track upstream changes.
 
 ```
-hiivmind-corpus-init → hiivmind-corpus-build → hiivmind-corpus-refresh
-       (once)                (once)                  (periodic)
+/hiivmind-corpus
 ```
 
-Point it at a repo, build the index collaboratively, refresh when things change. Local cache for fast searching. Tracks commit SHAs. Falls back to raw GitHub URLs when needed.
+One command, natural language:
+
+```
+"Create a corpus for Polars"
+"How do lazy frames work?"
+"Add the TanStack Query docs to my fullstack corpus"
+"Is my React corpus up to date?"
+```
+
+Combine git repos, local documents, and web articles into unified corpora. Eight skills handle the full lifecycle—discover, navigate, init, add-source, build, enhance, refresh, upgrade.
 
 ---
 
