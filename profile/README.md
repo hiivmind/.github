@@ -35,7 +35,7 @@ Think of it like [Claude Projects](https://claude.ai) for Claude Code—but bett
 
 A corpus solves all of this. You build a curated index once, Claude searches it directly without filling your context window, and the index tracks exactly where everything came from and how fresh it is. Install as many as you need—they're lightweight and independent.
 
-This implements the ["just in time" context pattern](https://www.anthropic.com/engineering/claude-code-best-practices) recommended by Anthropic—lightweight identifiers that load content on demand, like how humans use indexes rather than memorizing corpuses.
+This implements the ["just in time" context pattern](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) recommended by Anthropic—lightweight identifiers that load content on demand, like how humans use indexes rather than memorizing corpuses.
 
 ```
 /hiivmind-corpus
