@@ -31,7 +31,7 @@ No more `PVT_kwDOBx...` or `PVTSSF_...` hunting.
 
 **Persistent documentation indexes for any project.**
 
-Instead of web search or stale training data, `hiivmind-corpus` creates human-curated markdown indexes that track upstream changes.
+Instead of relying on Claude training data, web searches, or guessing URLs on demand, you build a human-curated index once and use it everywhere. The index tracks upstream changes, so you know exactly how fresh your documentation is and where it came from.
 
 ```
 /hiivmind-corpus
