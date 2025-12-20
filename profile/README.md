@@ -8,6 +8,27 @@ Skills that establish and maintain long-term knowldege without filling your cont
 
 ## Core Plugins
 
+### [hiivmind-pulse-gh](https://github.com/hiivmind/hiivmind-pulse-gh)
+
+**GitHub automation that understands your org.**
+
+Projects v2, milestones, branch protection — all require hunting for opaque GraphQL node IDs. `hiivmind-pulse-gh` discovers your org structure once, caches it, and works in plain English from then on.
+
+```
+/hiivmind-pulse-gh create issue for login timeout bug
+/hiivmind-pulse-gh set milestone v2.0 on issue #42
+/hiivmind-pulse-gh add PR to project
+/hiivmind-pulse-gh what operations do I have permission to perform on this repo?
+```
+
+No more `PVT_kwDOBx...` or `PVTSSF_...` hunting.
+
+**What it provides:**
+- 6 skills — init, refresh, operations, discover, awareness, plus GitHub docs corpus
+- 25 domain libraries — Issues, PRs, Projects v2, Milestones, Labels, Branch Protection, Rulesets, Actions, Secrets, Variables, Releases, and more
+- Discovery mode — explore all available operations across domains with interactive drill-down
+- Corpus-backed syntax — automatic GraphQL/REST lookup when you need exact API syntax
+
 ### [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus)
 
 **Persistent documentation indexes for any project.**
@@ -58,6 +79,16 @@ Pre-built documentation indexes, ready to install.
 |--------|---------|
 | `hiivmind-corpus-claude-agent-sdk` | Claude Agent SDK documentation |
 
+### [hiivmind-corpus-github](https://github.com/hiivmind/hiivmind-corpus-github)
+
+**GitHub platform:**
+
+| Corpus | Coverage |
+|--------|----------|
+| `hiivmind-corpus-github-docs` | 3,346 docs + GraphQL schema |
+
+Complete GitHub documentation — Actions, Copilot, REST API, GraphQL, code security, repositories, and more. Used by `hiivmind-pulse-gh` for API syntax lookup.
+
 ---
 
 ## Philosophy
@@ -89,6 +120,9 @@ Install via the Claude Code marketplace:
 
 /plugin marketplace add hiivmind/hiivmind-corpus-claude
 /plugin install hiivmind-corpus-claude-agent-sdk
+
+/plugin marketplace add hiivmind/hiivmind-corpus-github
+/plugin install hiivmind-corpus-github-docs
 ```
 
 ---
