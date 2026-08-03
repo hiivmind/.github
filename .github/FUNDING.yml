@@ -1,0 +1,4 @@
+# Org-wide default sponsor button for all hiivmind repositories.
+# A repo's own .github/FUNDING.yml overrides this default.
+# https://docs.github.com/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+github: hiivmind
