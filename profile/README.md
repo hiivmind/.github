@@ -15,7 +15,11 @@
 
 The projects here fall into three groups.
 
-**Documentation corpora.** A corpus is a git repository that indexes one project's documentation. Each entry in the index points to a document or section and has a title, summary, keywords and concepts. A corpus can also hold a concept graph and embeddings for semantic search. The hiivmind-corpus plugin builds and searches corpora from inside a coding agent: Claude Code, Codex, Cursor, Gemini CLI, Antigravity or OpenClaw. The agent searches the index first and loads only the documents it needs, the ["just in time" context approach](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) described by Anthropic. The corpus agent keeps published corpora up to date and opens a pull request with each change.
+**Documentation corpora.** [Context7](https://context7.com) and [Ref](https://ref.tools) give coding agents up-to-date documentation for public libraries, indexed and served from their own platforms. Material outside that set is harder to reach. Context7 takes private sources only on its paid plans, and Ref's private index takes GitHub repositories and uploaded PDF or Markdown files.
+
+hiivmind-corpus indexes documentation from any source you can point it at: git repositories, web pages such as blog posts, articles and wiki pages, PDFs, Obsidian vaults, `llms.txt` files, generated API references and local documents. One corpus can mix several of them, so a library's official docs can sit next to the papers, posts and internal notes that explain how it is used.
+
+A corpus is a git repository. Each entry in its index points to a document or section and has a title, summary, keywords and concepts. Embeddings of the entries can be committed alongside the index, so retrieval runs locally: vector search over the entries, boosted by the concept graph and reranked. The agent then reads only the documents it needs, the ["just in time" context approach](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) described by Anthropic. Because the index is plain files in git, nothing runs on a hosted service, and anyone can publish a corpus or register someone else's. The plugin works inside Claude Code, Codex, Cursor, Gemini CLI and Antigravity, and the corpus agent keeps published corpora up to date with pull requests.
 
 **agent-core.** A Python harness for agentic automation jobs. A job is a set of steps, each written as Markdown instructions, arranged into sequences in YAML. agent-core runs them against a model, journals each run so a crashed run can resume, and records what happened. It isn't specific to corpora; the corpus agent is one job built on it.
 
@@ -29,7 +33,7 @@ The projects here fall into three groups.
 
 | Project | What it does | Status |
 |---|---|---|
-| [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus) | Plugin for building, registering, searching and refreshing corpora. Installs in Claude Code, Codex, Cursor, Gemini CLI, Antigravity and OpenClaw. Sources can be git repos, local files, web pages, PDFs, Obsidian vaults and `llms.txt`. Search combines embeddings with the concept graph, and bridges link concepts across corpora. | Released |
+| [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus) | Plugin for building, registering, searching and refreshing corpora. Installs in Claude Code, Codex, Cursor, Gemini CLI and Antigravity. Sources can be git repos, local files, web pages, PDFs, Obsidian vaults and `llms.txt`. Search combines embeddings with the concept graph, and bridges link concepts across corpora. | Released |
 | [hiivmind-corpus-agent](https://github.com/hiivmind/hiivmind-corpus-agent) | An agent-core job that maintains corpora. Runs `refresh`, `enrich`, `migrate`, `status` and `graph-validate` without a person present, commits to a new branch, opens a pull request, and keeps a record of every run. | In development |
 | [hiivmind-corpus-lib](https://github.com/hiivmind/hiivmind-corpus-lib) | Python library that reads and writes a corpus directory: config, index, concept graph, rendered indexes, embeddings and search. Files are written in a fixed format, so a refresh diff contains only the entries that changed. | In development |
 
@@ -118,7 +122,7 @@ In Claude Code, for example:
 /hiivmind-corpus register github:hiivmind/hiivmind-corpus-data/hiivmind-corpus-polars
 ```
 
-Then ask a question, for example *"How do lazy frames work in Polars?"* [INSTALL.md](https://github.com/hiivmind/hiivmind-corpus/blob/main/INSTALL.md) has the steps for Codex, Cursor, Gemini CLI, Antigravity and OpenClaw.
+Then ask a question, for example *"How do lazy frames work in Polars?"* [INSTALL.md](https://github.com/hiivmind/hiivmind-corpus/blob/main/INSTALL.md) has the steps for Codex, Cursor, Gemini CLI and Antigravity.
 
 ---
 
