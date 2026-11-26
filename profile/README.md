@@ -1,45 +1,57 @@
 # hiivmind
 
-**Documentation corpora for coding agents, kept current by an agent of their own.**
+**Open-source plugins and Python libraries for coding agents and agent automation.**
 
-[![Claude Code plugin](https://img.shields.io/badge/Claude_Code-plugin-D97757?style=flat-square&logo=claude&logoColor=white)](https://github.com/hiivmind/hiivmind-corpus)
+[![Harnesses](https://img.shields.io/badge/Harnesses-Claude_Code_%C2%B7_Codex_%C2%B7_Cursor_%C2%B7_Gemini_CLI_%C2%B7_more-555555?style=flat-square)](#projects)
 [![Corpora](https://img.shields.io/badge/Corpora-18_public-2E7D32?style=flat-square)](#published-corpora)
 [![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?style=flat-square&logo=python&logoColor=white)](#status)
 [![Status](https://img.shields.io/badge/Status-experimental-orange?style=flat-square)](#status)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/hiivmind/hiivmind-corpus/blob/main/LICENSE)
 
-> **Experimental.** Everything here is public and in development. The corpus agent and the libraries under it are newest: their formats and interfaces can still change between commits.
+> **Experimental.** hiivmind-corpus and Swingle are released. The corpus agent, hiivmind-corpus-lib and hiivmind-agent-core are newer, and their formats and interfaces may still change.
 
 ---
 
-## Why hiivmind
+## What this is
 
-A coding agent that meets a library it does not know has three bad options: trust training data that is out of date, search the web and hope, or fetch pages one at a time with no map of what exists. Every session rediscovers the same things, and each rediscovery fills the context window.
+The projects here fall into three groups.
 
-A **corpus** is the map. It is a plain git repository holding a curated index of a project's documentation: one entry per document or section, each with a title, summary, keywords and concepts, plus a concept graph and embeddings for semantic search. The agent searches the index and fetches only the documents it needs, the ["just in time" context pattern](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) Anthropic recommends. Each source records the upstream commit it was indexed at, so the corpus knows when it is stale.
+**Documentation corpora.** A corpus is a git repository that indexes one project's documentation. Each entry in the index points to a document or section and has a title, summary, keywords and concepts. A corpus can also hold a concept graph and embeddings for semantic search. The hiivmind-corpus plugin builds and searches corpora from inside a coding agent: Claude Code, Codex, Cursor, Gemini CLI, Antigravity or OpenClaw. The agent searches the index first and loads only the documents it needs, the ["just in time" context approach](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) described by Anthropic. The corpus agent keeps published corpora up to date and opens a pull request with each change.
 
-An index is only useful while it is current, and upstream documentation moves every week. The **corpus agent** does that upkeep without a person at the terminal: it checks each corpus against its upstream sources, rescans and re-summarises what changed, removes entries whose files are gone, verifies a sample, and opens a pull request with the result. A person reviews a diff instead of rebuilding an index.
+**agent-core.** A Python harness for agentic automation jobs. A job is a set of steps, each written as Markdown instructions, arranged into sequences in YAML. agent-core runs them against a model, journals each run so a crashed run can resume, and records what happened. It isn't specific to corpora; the corpus agent is one job built on it.
+
+**Swingle.** A skills plugin that lets the coding agent you're working in hand one job to another CLI installed on your machine, such as Codex, Claude Code, opencode or Pi. Each delegation has a written brief, a return contract and a ledger entry.
 
 ---
 
 ## Projects
 
-### Corpus tooling
+### Documentation corpora
 
 | Project | What it does | Status |
 |---|---|---|
-| [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus) | Claude Code plugin to build, register, search and refresh corpora in plain language. Sources can be git repos, local files, web pages, PDFs, Obsidian vaults and `llms.txt`. Includes semantic search with concept-graph boosting and bridges between corpora. | Released |
-| [hiivmind-corpus-agent](https://github.com/hiivmind/hiivmind-corpus-agent) | The unattended maintainer. Runs `refresh`, `enrich`, `migrate`, `status` and `graph-validate` jobs over a corpus as sequences of model-driven nodes. Commits to a new branch and opens a pull request, never force-pushes, and records every run. | In development |
-| [hiivmind-corpus-lib](https://github.com/hiivmind/hiivmind-corpus-lib) | Python library that reads and writes a corpus directory: config, index, concept graph, rendered indexes, embeddings and search. Canonical formats, so a refresh diff shows only the entries that changed. | In development |
-| [hiivmind-agent-core](https://github.com/hiivmind/hiivmind-agent-core) | Small harness the corpus agent runs on. Executes nodes and sequences behind a pluggable model backend, with a journal so a crashed run can resume. | In development |
+| [hiivmind-corpus](https://github.com/hiivmind/hiivmind-corpus) | Plugin for building, registering, searching and refreshing corpora. Installs in Claude Code, Codex, Cursor, Gemini CLI, Antigravity and OpenClaw. Sources can be git repos, local files, web pages, PDFs, Obsidian vaults and `llms.txt`. Search combines embeddings with the concept graph, and bridges link concepts across corpora. | Released |
+| [hiivmind-corpus-agent](https://github.com/hiivmind/hiivmind-corpus-agent) | An agent-core job that maintains corpora. Runs `refresh`, `enrich`, `migrate`, `status` and `graph-validate` without a person present, commits to a new branch, opens a pull request, and keeps a record of every run. | In development |
+| [hiivmind-corpus-lib](https://github.com/hiivmind/hiivmind-corpus-lib) | Python library that reads and writes a corpus directory: config, index, concept graph, rendered indexes, embeddings and search. Files are written in a fixed format, so a refresh diff contains only the entries that changed. | In development |
+
+### Agent automation
+
+| Project | What it does | Status |
+|---|---|---|
+| [hiivmind-agent-core](https://github.com/hiivmind/hiivmind-agent-core) | Python harness for model-driven automation jobs. A job declares its steps as Markdown instruction files, its sequences in YAML, and a policy the model must follow. The harness runs them through a pluggable backend (LangGraph today, with Anthropic or OpenAI models), journals runs with DBOS so a crashed run can resume, and can run unattended or ask a person at the terminal. | In development |
+
+### Delegation
+
+| Project | What it does | Status |
+|---|---|---|
+| [swingle](https://github.com/hiivmind/swingle) | Skills plugin that lets the driving coding agent delegate a job to another provider CLI already installed and signed in on the machine: `codex`, `claude`, `opencode`, `grok`, `pi`, `agy`, `omp`, `cursor-agent`, `devin` or `copilot`. The model writes the brief, picks the CLI, runs it and checks the result; each run is recorded in `.swingle/delegate/`. Installs in Claude Code, Codex, Pi, Antigravity and Oh My Pi. | Released |
 
 ### Published corpora
 
-Open corpora, ready to register. Entry counts come from each corpus's `index.yaml`.
+Entry counts are from each corpus's `index.yaml`.
 
 | Corpus | Covers | Entries |
 |---|---|---|
-| **Data engineering** — [hiivmind-corpus-data](https://github.com/hiivmind/hiivmind-corpus-data) | | |
+| **Data engineering** ([hiivmind-corpus-data](https://github.com/hiivmind/hiivmind-corpus-data)) | | |
 | [polars](https://github.com/hiivmind/hiivmind-corpus-data/tree/main/hiivmind-corpus-polars) | Polars DataFrames in Python and Rust | 112 |
 | [ibis](https://github.com/hiivmind/hiivmind-corpus-data/tree/main/hiivmind-corpus-ibis) | Portable dataframe expressions across 20+ SQL backends | 95 |
 | [narwhals](https://github.com/hiivmind/hiivmind-corpus-data/tree/main/hiivmind-corpus-narwhals) | Dataframe-agnostic code for pandas, Polars and PyArrow | 67 |
@@ -61,15 +73,16 @@ Open corpora, ready to register. Entry counts come from each corpus's `index.yam
 | [fastmail](https://github.com/hiivmind/hiivmind-corpus-fastmail) | Fastmail API, JMAP specifications and samples | v1 |
 | [stakpak](https://github.com/hiivmind/hiivmind-corpus-stakpak) | Stakpak infrastructure-as-code platform and REST API | v1 |
 
-*v1*: an earlier index format (`index.md` only). The agent's `migrate` job converts these to the current format.
+*v1*: an older index format (`index.md` only). The corpus agent's `migrate` job converts these to the current format.
 
 ---
 
-## How they fit together
+## How the corpus projects fit together
 
 ```
-  upstream docs                                Claude Code
-  (git repos, sites, PDFs)                          |
+  upstream docs                                 coding agent
+  (git repos, sites, PDFs)                (Claude Code, Codex, ...)
+         |                                          |
          |                                    hiivmind-corpus
          |                               (register, search, build)
          v                                          v
@@ -79,10 +92,10 @@ Open corpora, ready to register. Entry counts come from each corpus's `index.yam
     +----+-----------------+
     |                      |
   hiivmind-agent-core    hiivmind-corpus-lib
-  (runs the nodes)       (reads and writes the corpus)
+  (runs the job)         (reads and writes the corpus)
 ```
 
-A corpus is data only: no server and no database, so anyone can fork, publish or review one like any other repository. The plugin reads it; the agent maintains it; people review the pull requests.
+A corpus is only files: YAML, Markdown and an embeddings table, with no server or database. It can be forked, published and reviewed like any other repository. The plugin reads corpora, the corpus agent updates them, and its changes arrive as pull requests. agent-core sits underneath the corpus agent but can run any other job.
 
 ---
 
@@ -90,9 +103,13 @@ A corpus is data only: no server and no database, so anyone can fork, publish or
 
 | If you want to… | Start with | Then |
 |---|---|---|
-| **Ask questions of a library's docs** | Install hiivmind-corpus and register a published corpus | Register more; `/hiivmind-corpus bridge` links concepts across them |
-| **Index your own project or a library not listed** | `/hiivmind-corpus init`, `add-source`, `build` | Publish the repository so others can register it |
-| **Keep a corpus current** | `/hiivmind-corpus refresh` in a session | [hiivmind-corpus-agent](https://github.com/hiivmind/hiivmind-corpus-agent) for unattended refreshes that arrive as pull requests |
+| Ask questions of a library's docs | Install hiivmind-corpus in your coding agent and register a published corpus | Register more; `/hiivmind-corpus bridge` links concepts across them |
+| Index your own project, or a library not listed | `/hiivmind-corpus init`, `add-source`, `build` | Publish the repository so others can register it |
+| Keep a corpus up to date | `/hiivmind-corpus refresh` in a session | [hiivmind-corpus-agent](https://github.com/hiivmind/hiivmind-corpus-agent) to run refreshes unattended and open pull requests |
+| Automate a multi-step job with a model | [hiivmind-agent-core](https://github.com/hiivmind/hiivmind-agent-core): write the steps, sequences and policy for your job | Read [hiivmind-corpus-agent](https://github.com/hiivmind/hiivmind-corpus-agent) as a complete example |
+| Hand a job to another CLI without leaving your session | Install [Swingle](https://github.com/hiivmind/swingle) | `swingle-delegate` for one job, `swingle-sdd` to run a written plan |
+
+In Claude Code, for example:
 
 ```bash
 /plugin marketplace add hiivmind/hiivmind-corpus
@@ -101,29 +118,29 @@ A corpus is data only: no server and no database, so anyone can fork, publish or
 /hiivmind-corpus register github:hiivmind/hiivmind-corpus-data/hiivmind-corpus-polars
 ```
 
-Then ask: *"How do lazy frames work in Polars?"*
+Then ask a question, for example *"How do lazy frames work in Polars?"* [INSTALL.md](https://github.com/hiivmind/hiivmind-corpus/blob/main/INSTALL.md) has the steps for Codex, Cursor, Gemini CLI, Antigravity and OpenClaw.
 
 ---
 
-## Design principles
+## Corpus design notes
 
-1. **The index is the product.** Curated entries with summaries and concepts, not a dump of pages. The agent loads what it needs and nothing else.
-2. **A corpus is a git repository.** Plain YAML and Markdown that a person can read, diff, review and fix. If a person can't read it, a person can't fix it.
-3. **Freshness is a fact, not a guess.** Each source records the commit it was indexed at, and each entry its source and path, so a refresh rescans exactly what changed upstream.
-4. **Maintenance proposes; people decide.** The agent works on a branch and opens a pull request. It never force-pushes or rewrites history.
-5. **Search without a service.** Embeddings are committed next to the index and searched locally. A refresh never downloads a model.
+1. Entries are curated. Each has a summary, keywords and concepts, so an agent can choose documents before reading them.
+2. Corpora are plain YAML and Markdown in git, so they can be read, diffed and edited by hand.
+3. Each source records the upstream commit it was indexed at, and each entry records its source and path. A refresh rescans only the files that changed upstream.
+4. The corpus agent commits to a branch and opens a pull request. It does not force-push or rewrite history.
+5. Embeddings are committed next to the index and searched locally. A refresh does not download an embedding model.
 
 ---
 
 ## Built on
 
-[Claude Code](https://docs.claude.com/en/docs/claude-code/overview) · [LangGraph](https://www.langchain.com/langgraph) · [DBOS](https://www.dbos.dev) · [LanceDB](https://lancedb.com) · [FastEmbed](https://github.com/qdrant/fastembed) · [GitHub CLI](https://cli.github.com)
+[LangGraph](https://www.langchain.com/langgraph) · [DBOS](https://www.dbos.dev) · [LanceDB](https://lancedb.com) · [FastEmbed](https://github.com/qdrant/fastembed) · [GitHub CLI](https://cli.github.com)
 
 ---
 
 ## Status
 
-hiivmind-corpus is open source under the MIT License, and the published corpora are public. [hiivmind-corpus-agent](https://github.com/hiivmind/hiivmind-corpus-agent), [hiivmind-corpus-lib](https://github.com/hiivmind/hiivmind-corpus-lib) and [hiivmind-agent-core](https://github.com/hiivmind/hiivmind-agent-core) are public and in development, require Python 3.12 or later, and are not yet on PyPI; the agent takes the other two as checkouts beside it. The agent has opened its first refresh pull requests against live corpora, such as [hiivmind-corpus-data#17](https://github.com/hiivmind/hiivmind-corpus-data/pull/17). Repositories still in an earlier format are listed as *v1* above.
+hiivmind-corpus, Swingle, hiivmind-agent-core and hiivmind-corpus-agent are MIT licensed; hiivmind-corpus-lib is AGPL-3.0-or-later. The published corpora are public. The Python projects need Python 3.12 or later and are not on PyPI yet; the corpus agent expects agent-core and hiivmind-corpus-lib checked out beside it. The corpus agent has opened its first refresh pull requests on live corpora, for example [hiivmind-corpus-data#17](https://github.com/hiivmind/hiivmind-corpus-data/pull/17).
 
 ---
 
